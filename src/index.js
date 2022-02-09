@@ -1,19 +1,36 @@
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { useState } from 'react';
+import './style.css';
 
-function App() {
-  const [state, setState] = useState(0);
-  console.log(state);
+/*
+  INSTRUCTIONS:
+  Convert the code below from a Class component
+  using setState to a function component using 
+  the useState Hook.
+*/
 
-  const increment = () => {
-    setState(state + 1);
+class Theme extends React.Component {
+  state = {
+    theme: 'light',
   };
-  return (
-    <div>
-      <button onClick={increment}>Increment</button>
-      <h3>Incremented Value: {state}</h3>
-    </div>
-  );
+
+  toDark = () => this.setState({ theme: 'dark' });
+  toLight = () => this.setState({ theme: 'light' });
+
+  render() {
+    const { theme } = this.state;
+
+    return (
+      <div className={theme}>
+        {theme === 'light' ? (
+          <button onClick={this.toDark}>🔦</button>
+        ) : (
+          <button onClick={this.toLight}>💡</button>
+        )}
+      </div>
+    );
+  }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const rootElement = document.getElementById('root');
+ReactDOM.render(<Theme />, rootElement);
